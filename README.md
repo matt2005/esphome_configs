@@ -44,7 +44,7 @@ Each Device also has the following switch:
 - espcam32
   
   This is an AIThinker esp32cam board available from [http://s.click.aliexpress.com/e/bdKN2vBK](AliExpress) I have installed heatsinks on the esp32 chip, as I found that the camera would stop working after a few minutes/hours.
-  ![AI-Thinker esp32 CAM][AI-Thinker_espcam32]
+  <img src="images/aithinker_esp32cam.jpg" width="200" />
 
   The Flash is presented as a switch.
 
@@ -66,5 +66,3 @@ Each Device also has the following switch:
 
   [Configuration file: templatefiles\blackboardt5.yaml](templatefiles/blackboardt5.yaml)
 
-
-[AI-Thinker_espcam32]: images/aithinker_esp32cam.jpg "AI-Thinker esp32 CAM"
