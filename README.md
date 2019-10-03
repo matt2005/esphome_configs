@@ -13,11 +13,17 @@ The common files will pull the secrets from templatefiles/secrets.yaml
 
 ## Devices
 
-- NodeMCU
+- Room Sensor
+  
+  This is a NodeMcu with a DHT11 connected to Pin D2.
+  The temperature and humidity values are averaged to reduce erroreous spikes in values.
 
   [Configuration file: templatefiles\roomsensor.yaml](templatefiles/roomsensor.yaml)
 
-- esp32
+- Room Sensor (esp32)
+  
+  This is a Nodemcu-esp32 with a DHT11 connected to GPIO15.
+  The temperature and humidity values are averaged to reduce erroreous spikes in values.
   
   [Configuration file: templatefiles\roomsensor_esp32.yaml](templatefiles/roomsensor_esp32.yaml)
 
@@ -26,11 +32,15 @@ The common files will pull the secrets from templatefiles/secrets.yaml
   [Configuration file: templatefiles\aithinker_esp32cam.yaml](templatefiles/aithinker_esp32cam.yaml)
 
 - SonOff POW R1
+  
+  This is a SonOff POW R1
 
   [Configuration file: templatefiles\sonoffpowr1.yaml](templatefiles/sonoffpowr1.yaml)
 
 - SonOff POW R2
-
+  
+  This is a SonOff POW R2
+  
   [Configuration file: templatefiles\sonoffpowr2.yaml](templatefiles/sonoffpowr2.yaml)
 
 - Blackboard-T5
