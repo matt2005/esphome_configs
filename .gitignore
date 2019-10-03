@@ -10,3 +10,4 @@
 /secrets.yaml
 **/*.disabled
 **/*
+templatefiles/secrets.yaml
