@@ -1,0 +1,48 @@
+esphome:
+  name: $devicename
+  platform: ESP32
+  board: nodemcu-32s
+
+#deep_sleep:
+#  run_duration: 5s
+#  sleep_duration: 60min
+
+<<: !include common_static.yaml
+
+sensor:
+  - platform: wifi_signal
+    name: ${upper_devicename} WiFi Signal
+    id: ${devicename}_wifi_signal
+    update_interval: 15s
+  - platform: uptime
+    name: ${upper_devicename} Uptime
+
+switch:
+  - platform: restart
+    name:  ${upper_devicename} Restart
+
+text_sensor:
+  - platform: version
+    name: ${upper_devicename} Version
+  - platform: template
+    name: ${upper_devicename} MAC Address
+    lambda: 'return {WiFi.macAddress().c_str()};'
+    icon: mdi:fingerprint
+    update_interval: 1h
+  - platform: template
+    name: ${upper_devicename} Wifi Strength
+    id: ${devicename}_wifi_strength
+    icon: "mdi:wifi"
+    lambda: |-
+      if (id(${devicename}_wifi_signal).state > -50 ) {
+        return {"Excellent"};
+      } else if (id(${devicename}_wifi_signal).state > -60) {
+        return {"Good"};
+      } else if (id(${devicename}_wifi_signal).state > -70) {
+        return {"Fair"};
+      } else if (id(${devicename}_wifi_signal).state < -70) {
+        return {"Weak"};
+      } else {
+        return {"None"};
+      }
+    update_interval: 30s

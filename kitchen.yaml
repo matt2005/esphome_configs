@@ -1,0 +1,5 @@
+substitutions:
+  devicename: kitchen
+  upper_devicename: "Kitchen"
+  device_ip: "192.168.1.215"
+<<: !include templatefiles/roomsensor.yaml

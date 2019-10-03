@@ -1,0 +1,5 @@
+substitutions:
+  devicename: littlebed
+  upper_devicename: "Little Bedroom"
+  device_ip: "192.168.1.212"
+<<: !include templatefiles/roomsensor.yaml

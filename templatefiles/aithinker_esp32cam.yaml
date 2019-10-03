@@ -1,0 +1,63 @@
+esphome:
+  name: $devicename
+  platform: ESP32
+  board: esp-wrover-kit
+
+<<: !include common.yaml
+sensor:
+  - platform: wifi_signal
+    name: ${upper_devicename} WiFi Signal
+    id: ${devicename}_wifi_signal
+    update_interval: 60s
+  - platform: uptime
+    name: ${upper_devicename} Uptime
+
+switch:
+  - platform: restart
+    name:  ${upper_devicename} Restart
+  - platform: gpio
+    name: ${upper_devicename} Flash
+    pin: GPIO4
+
+text_sensor:
+  - platform: version
+    name: ${upper_devicename} Version
+  - platform: template
+    name: ${upper_devicename} MAC Address
+    lambda: 'return {WiFi.macAddress().c_str()};'
+    icon: mdi:fingerprint
+    update_interval: 1h
+  - platform: template
+    name: ${upper_devicename} Wifi Strength
+    id: ${devicename}_wifi_strength
+    icon: "mdi:wifi"
+    lambda: |-
+      if (id(${devicename}_wifi_signal).state > -50 ) {
+        return {"Excellent"};
+      } else if (id(${devicename}_wifi_signal).state > -60) {
+        return {"Good"};
+      } else if (id(${devicename}_wifi_signal).state > -70) {
+        return {"Fair"};
+      } else if (id(${devicename}_wifi_signal).state < -70) {
+        return {"Weak"};
+      } else {
+        return {"None"};
+      }
+    update_interval: 30s
+
+esp32_camera: #ai-thinker
+  name: $upper_devicename Camera
+  external_clock:
+    pin: GPIO0
+    frequency: 20MHz
+  i2c_pins:
+    sda: GPIO26
+    scl: GPIO27
+  data_pins: [GPIO5, GPIO18, GPIO19, GPIO21, GPIO36, GPIO39, GPIO34, GPIO35]
+  vsync_pin: GPIO25
+  href_pin: GPIO23
+  pixel_clock_pin: GPIO22
+  power_down_pin: GPIO32
+  vertical_flip: false
+  horizontal_mirror: false
+#  test_pattern: true

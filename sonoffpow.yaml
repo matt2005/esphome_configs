@@ -1,0 +1,6 @@
+substitutions:
+  devicename: sonoffpow
+  upper_devicename: "Sonoff POW"
+  device_ip: "192.168.1.214"
+
+<<: !include templatefiles/sonoff_powr1.yaml

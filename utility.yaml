@@ -1,0 +1,6 @@
+substitutions:
+  devicename: utility
+  upper_devicename: "Utility"
+  device_ip: "192.168.1.211"
+
+<<: !include templatefiles/roomsensor.yaml

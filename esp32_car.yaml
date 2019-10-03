@@ -1,0 +1,6 @@
+substitutions:
+  devicename: esp32_car
+  upper_devicename: "ESP32_CAR"
+  device_ip: "192.168.1.217"
+
+<<: !include templatefiles/car_esp32.yaml

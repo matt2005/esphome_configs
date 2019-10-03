@@ -1,0 +1,5 @@
+substitutions:
+  devicename: "espcam"
+  upper_devicename: "ESPCAM"
+
+<<: !include templatefiles/aithinker_esp32cam.yaml

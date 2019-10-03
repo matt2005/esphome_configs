@@ -1,0 +1,6 @@
+substitutions:
+  devicename: immersion
+  upper_devicename: "Immersion"
+  device_ip: "192.168.1.124"
+
+<<: !include templatefiles/sonoff_powr1.yaml

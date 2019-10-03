@@ -1,0 +1,26 @@
+wifi:
+  ssid: !secret ssid
+  password: !secret ssid_password
+  domain: .home.local
+  fast_connect: true
+  manual_ip:
+    static_ip: ${device_ip}
+    gateway: !secret ip_gateway
+    subnet: !secret ip_subnet
+    dns1: !secret ip_dns1
+    dns2: !secret ip_dns2
+#  use_address: "192.168.1.211"
+
+# Enable debug
+debug:
+
+# Enable logging
+logger:
+  level: debug
+
+# Enable Home Assistant API
+api:
+  password: !secret api_password
+
+ota:
+  password: !secret ota_password

@@ -1,0 +1,14 @@
+wifi:
+  ssid: !secret ssid
+  password: !secret ssid_password
+  domain: .home.local
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  password: !secret api_password
+
+ota:
+  password: !secret ota_password
