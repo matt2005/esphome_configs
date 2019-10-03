@@ -55,13 +55,13 @@ Each Device also has the following switch:
   
   This is a SonOff POW R1
 
-  [Configuration file: templatefiles\sonoffpowr1.yaml](templatefiles/sonoffpowr1.yaml)
+  [Configuration file: templatefiles\sonoffpow_r1.yaml](templatefiles/sonoffpowr1.yaml)
 
 - SonOff POW R2
   
   This is a SonOff POW R2
   
-  [Configuration file: templatefiles\sonoffpowr2.yaml](templatefiles/sonoffpowr2.yaml)
+  [Configuration file: templatefiles\sonoffpow_r2.yaml](templatefiles/sonoffpowr2.yaml)
 <!--
 - Blackboard-T5
 
