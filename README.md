@@ -15,24 +15,24 @@ The common files will pull the secrets from templatefiles/secrets.yaml
 
 - NodeMCU
 
-  [Configuration file: templatesfiles\roomsensor.yaml](templatesfiles/roomsensor.yaml)
+  [Configuration file: templatefiles\roomsensor.yaml](templatefiles/roomsensor.yaml)
 
 - esp32
   
-  [Configuration file: templatesfiles\roomsensor_esp32.yaml](templatesfiles/roomsensor_esp32.yaml)
+  [Configuration file: templatefiles\roomsensor_esp32.yaml](templatefiles/roomsensor_esp32.yaml)
 
 - espcam32
 
-  [Configuration file: templatesfiles\aithinker_esp32cam.yaml](templatesfiles/aithinker_esp32cam.yaml)
+  [Configuration file: templatefiles\aithinker_esp32cam.yaml](templatefiles/aithinker_esp32cam.yaml)
 
 - SonOff POW R1
 
-  [Configuration file: templatesfiles\sonoffpowr1.yaml](templatesfiles/sonoffpowr1.yaml)
+  [Configuration file: templatefiles\sonoffpowr1.yaml](templatefiles/sonoffpowr1.yaml)
 
 - SonOff POW R2
 
-  [Configuration file: templatesfiles\sonoffpowr2.yaml](templatesfiles/sonoffpowr2.yaml)
+  [Configuration file: templatefiles\sonoffpowr2.yaml](templatefiles/sonoffpowr2.yaml)
 
 - Blackboard-T5
 
-  [Configuration file: templatesfiles\blackboardt5.yaml](templatesfiles/blackboardt5.yaml)
+  [Configuration file: templatefiles\blackboardt5.yaml](templatefiles/blackboardt5.yaml)
