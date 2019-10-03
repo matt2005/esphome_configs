@@ -11,6 +11,20 @@ The device specific file will then import the common settings from either
 
 The common files will pull the secrets from templatefiles/secrets.yaml
 
+## Common features
+
+Each Device has the following standard sensors:
+
+- MAC address
+- Uptime
+- Version
+- Wifi Signal (in dB)
+- Wifi Strength (in english)
+
+Each Device also has the following switch:
+
+- Restart
+
 ## Devices
 
 - Room Sensor
@@ -28,6 +42,11 @@ The common files will pull the secrets from templatefiles/secrets.yaml
   [Configuration file: templatefiles\roomsensor_esp32.yaml](templatefiles/roomsensor_esp32.yaml)
 
 - espcam32
+  
+  This is an AIThinker esp32cam board available from [http://s.click.aliexpress.com/e/bdKN2vBK](AliExpress) I have installed heatsinks on the esp32 chip, as I found that the camera would stop working after a few minutes/hours.
+  ![AI-Thinker esp32 CAM][AI-Thinker_espcam32]
+
+  The Flash is presented as a switch.
 
   [Configuration file: templatefiles\aithinker_esp32cam.yaml](templatefiles/aithinker_esp32cam.yaml)
 
@@ -46,3 +65,6 @@ The common files will pull the secrets from templatefiles/secrets.yaml
 - Blackboard-T5
 
   [Configuration file: templatefiles\blackboardt5.yaml](templatefiles/blackboardt5.yaml)
+
+
+[AI-Thinker_espcam32]: (images/aithinker_esp32cam.jpg) "AI-Thinker esp32 CAM"
