@@ -67,4 +67,4 @@ Each Device also has the following switch:
   [Configuration file: templatefiles\blackboardt5.yaml](templatefiles/blackboardt5.yaml)
 
 
-[AI-Thinker_espcam32]: (images/aithinker_esp32cam.jpg) "AI-Thinker esp32 CAM"
+[AI-Thinker_espcam32]: images/aithinker_esp32cam.jpg "AI-Thinker esp32 CAM"
