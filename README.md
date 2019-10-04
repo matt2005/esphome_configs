@@ -1,7 +1,7 @@
 # my esphome configs
 
 ## Overview
-
+I'm using version 1.14.0-dev in a hassio.
 The configurations are modular. Each device will have a single yaml file, this file will use a device specific file from the templatefiles directory.
 
 The device specific file will then import the common settings from either
