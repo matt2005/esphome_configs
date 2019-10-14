@@ -1,0 +1,62 @@
+esphome:
+  name: $devicename
+  platform: ESP8266
+  board:  ${board}
+
+<<: !include common_static.yaml
+
+sensor:
+  - platform: wifi_signal
+    name: ${upper_devicename} WiFi Signal
+    id: ${devicename}_wifi_signal
+    update_interval: 900s
+  - platform: uptime
+    name: ${upper_devicename} Uptime
+  - platform: dht
+    pin: D2
+    model: DHT11
+    update_interval: 5s
+    temperature:
+      name: "${upper_devicename} Temperature"
+      accuracy_decimals: 2
+      filters:
+        - sliding_window_moving_average:
+            window_size: 10
+            send_every: 5
+            send_first_at: 2
+    humidity:
+      name: "${upper_devicename} Humidity"
+      filters:
+        - sliding_window_moving_average:
+            window_size: 10
+            send_every: 5
+            send_first_at: 2
+switch:
+  - platform: restart
+    name:  ${upper_devicename} Restart
+
+text_sensor:
+  - platform: version
+    name: ${upper_devicename} Version
+  - platform: template
+    name: ${upper_devicename} MAC Address
+    lambda: 'return {WiFi.macAddress().c_str()};'
+    icon: mdi:fingerprint
+    update_interval: 60s
+  - platform: template
+    name: ${upper_devicename} Wifi Strength
+    id: ${devicename}_wifi_strength
+    icon: "mdi:wifi"
+    lambda: |-
+      if (id(${devicename}_wifi_signal).state > -50 ) {
+        return {"Excellent"};
+      } else if (id(${devicename}_wifi_signal).state > -60) {
+        return {"Good"};
+      } else if (id(${devicename}_wifi_signal).state > -70) {
+        return {"Fair"};
+      } else if (id(${devicename}_wifi_signal).state < -70) {
+        return {"Weak"};
+      } else {
+        return {"None"};
+      }
+    update_interval: 900s
