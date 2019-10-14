@@ -1,5 +1,7 @@
 substitutions:
   devicename: kitchen
   upper_devicename: "Kitchen"
+  board: nodemcuv2
   device_ip: "192.168.1.215"
-<<: !include templatefiles/roomsensor.yaml
+
+<<: !include templatefiles/roomsensor_dht11.yaml

@@ -1,6 +1,7 @@
 substitutions:
   devicename: masterbed
   upper_devicename: "Masterbed"
+  board: nodemcuv2
   device_ip: "192.168.1.216"
 
-<<: !include templatefiles/roomsensor.yaml
+<<: !include templatefiles/roomsensor_dht11.yaml

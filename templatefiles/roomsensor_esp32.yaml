@@ -13,7 +13,7 @@ sensor:
   - platform: wifi_signal
     name: ${upper_devicename} WiFi Signal
     id: ${devicename}_wifi_signal
-    update_interval: 15s
+    update_interval: 900s
   - platform: uptime
     name: ${upper_devicename} Uptime
   - platform: dht
@@ -47,7 +47,7 @@ text_sensor:
     name: ${upper_devicename} MAC Address
     lambda: 'return {WiFi.macAddress().c_str()};'
     icon: mdi:fingerprint
-    update_interval: 1h
+    update_interval: 60s
   - platform: template
     name: ${upper_devicename} Wifi Strength
     id: ${devicename}_wifi_strength
@@ -64,4 +64,4 @@ text_sensor:
       } else {
         return {"None"};
       }
-    update_interval: 30s
+    update_interval: 900s
