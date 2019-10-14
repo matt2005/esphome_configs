@@ -29,13 +29,19 @@ Each Device also has the following switch:
 
 ## Devices
 
-- Room Sensor
+- Room Sensor DHT11
   
   This is a NodeMcu with a DHT11 connected to Pin D2.
   The temperature and humidity values are averaged to reduce erroreous spikes in values.
 
-  [Configuration file: templatefiles\roomsensor.yaml](templatefiles/roomsensor.yaml)
+  [Configuration file: templatefiles\roomsensor_dht11.yaml](templatefiles/roomsensor_dht11.yaml)
 
+- Room Sensor bmp280
+
+  This is a Wemos-D1 mini with a hw-611 e/p (bmp280) connected D1/sda D1/scl.
+  
+  [Configuration file: templatefiles\roomsensor_bmp280.yaml](templatefiles/roomsensor_bmp280.yaml)
+ 
 - Room Sensor (esp32)
   
   This is a Nodemcu-esp32 with a DHT11 connected to GPIO15.
