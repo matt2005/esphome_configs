@@ -38,7 +38,7 @@ Each Device also has the following switch:
 
 - Room Sensor bmp280
 
-  This is a Wemos-D1 mini with a hw-611 e/p (bmp280) connected D1/sda D1/scl.
+  This is a Wemos-D1 mini with a hw-611 e/p (bmp280) connected D1/sda D2/scl.
   
   [Configuration file: templatefiles\roomsensor_bmp280.yaml](templatefiles/roomsensor_bmp280.yaml)
  
