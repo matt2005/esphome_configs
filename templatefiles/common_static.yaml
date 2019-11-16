@@ -24,3 +24,7 @@ api:
 
 ota:
   password: !secret ota_password
+
+time:
+  - platform: homeassistant
+    id: homeassistant_time

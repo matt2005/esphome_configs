@@ -64,7 +64,9 @@ sensor:
         - below: 3.0
           then:
             - light.turn_off: led
-
+  - platform: total_daily_energy
+    name: ${upper_devicename} Total Daily Energy
+    power_id: power
 switch:
   - platform: restart
     name:  ${upper_devicename} Restart
