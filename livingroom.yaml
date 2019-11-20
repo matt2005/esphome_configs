@@ -1,0 +1,7 @@
+substitutions:
+  devicename: livingroom
+  upper_devicename: "Livingroom"
+  device_ip: "192.168.1.218"
+  board: d1_mini
+
+<<: !include templatefiles/roomsensor_bmp280.yaml

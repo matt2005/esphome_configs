@@ -1,7 +1,0 @@
-substitutions:
-  devicename: loft
-  upper_devicename: "Loft"
-  device_ip: "192.168.1.218"
-  board: d1_mini
-
-<<: !include templatefiles/testsensor.yaml
