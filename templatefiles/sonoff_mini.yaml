@@ -1,0 +1,69 @@
+esphome:
+  name: $devicename
+  platform: ESP8266
+  board: esp01_1m
+
+<<: !include common_static.yaml
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO0
+      mode: INPUT_PULLUP
+      inverted: True
+    name: ${upper_devicename} Button
+    on_press:
+      - switch.toggle: fakebutton
+
+sensor:
+  - platform: wifi_signal
+    name: ${upper_devicename} WiFi Signal
+    id: ${devicename}_wifi_signal
+    update_interval: 900s
+  - platform: uptime
+    name: ${upper_devicename} Uptime
+switch:
+  - platform: restart
+    name:  ${upper_devicename} Restart
+  - platform: template
+    name: ${upper_devicename} Relay
+    optimistic: true
+    id: fakebutton
+    turn_on_action:
+    - switch.turn_on: relay
+    turn_off_action:
+    - switch.turn_off: relay
+  - platform: gpio
+    id: relay
+    pin: GPIO12
+
+text_sensor:
+  - platform: version
+    name: ${upper_devicename} Version
+  - platform: template
+    name: ${upper_devicename} MAC Address
+    lambda: 'return {WiFi.macAddress().c_str()};'
+    icon: mdi:fingerprint
+    update_interval: 60s
+  - platform: template
+    name: ${upper_devicename} Wifi Strength
+    id: ${devicename}_wifi_strength
+    icon: "mdi:wifi"
+    lambda: |-
+      if (id(${devicename}_wifi_signal).state > -50 ) {
+        return {"Excellent"};
+      } else if (id(${devicename}_wifi_signal).state > -60) {
+        return {"Good"};
+      } else if (id(${devicename}_wifi_signal).state > -70) {
+        return {"Fair"};
+      } else if (id(${devicename}_wifi_signal).state < -70) {
+        return {"Weak"};
+      } else {
+        return {"None"};
+      }
+    update_interval: 900s
+
+status_led:
+  pin:
+    number: GPIO13
+    inverted: yes

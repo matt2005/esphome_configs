@@ -1,0 +1,6 @@
+substitutions:
+  devicename: sonoffmini1
+  upper_devicename: "SonOff Mini 1"
+#  device_ip: "192.168.1.219"
+
+<<: !include templatefiles/sonoff_mini.yaml

@@ -1,0 +1,6 @@
+substitutions:
+  devicename: houselights
+  upper_devicename: "HouseLights"
+  device_ip: "192.168.1.219"
+
+<<: !include templatefiles/sonoff_mini.yaml
