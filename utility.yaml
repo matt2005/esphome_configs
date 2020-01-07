@@ -2,6 +2,11 @@ substitutions:
   devicename: utility
   upper_devicename: "Utility"
   board: nodemcuv2
-  device_ip: "192.168.1.211"
+  device_ip: "192.168.1.217"
 
-<<: !include templatefiles/roomsensor_dht11.yaml
+<<: !include templatefiles/esp32.yaml
+
+remote_receiver:
+  pin: GPIO32
+  dump: 
+    - rc_switch
