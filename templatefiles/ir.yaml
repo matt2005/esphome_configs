@@ -1,0 +1,34 @@
+esphome:
+  name: $devicename
+  platform: ESP8266
+  board: esp01_1m
+
+<<: !include common.yaml
+
+sensor:
+  - platform: wifi_signal
+    name: ${upper_devicename} WiFi Signal
+    update_interval: 60s
+  - platform: uptime
+    name: ${upper_devicename} Uptime
+switch:
+  - platform: restart
+    name:  ${upper_devicename} Restart
+text_sensor:
+  - platform: version
+    name: ${upper_devicename} Version
+api:
+  services:
+    - service: send_raw_command
+      variables:
+        command: int[]
+      then:
+        - remote_transmitter.transmit_raw:
+            code: !lambda 'return command;'
+remote_transmitter:
+  pin: GPIO14
+  carrier_duty_percent: 50%
+remote_receiver:
+  pin: GPIO5
+  dump: all
+#// GPIO4 Blue Led

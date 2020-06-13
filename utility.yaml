@@ -7,6 +7,15 @@ substitutions:
 <<: !include templatefiles/esp32.yaml
 
 remote_receiver:
-  pin: GPIO32
-  dump: 
+  pin:
+    number: GPIO32
+    inverted: False
+  dump:
+    - rc5
+    - samsung
+    - lg
+    - nec
+    - panasonic
+    - jvc
+    - sony
     - rc_switch

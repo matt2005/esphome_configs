@@ -1,7 +1,7 @@
 wifi:
   ssid: !secret ssid
   password: !secret ssid_password
-  domain: .home.local
+  #domain: .home.local
   fast_connect: true
   manual_ip:
     static_ip: ${device_ip}
