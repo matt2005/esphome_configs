@@ -1,7 +1,6 @@
 substitutions:
   devicename: utility
   upper_devicename: "Utility"
-  board: nodemcuv2
   device_ip: "192.168.1.217"
 
 <<: !include templatefiles/esp32.yaml
@@ -11,11 +10,70 @@ remote_receiver:
     number: GPIO32
     inverted: False
   dump:
-    - rc5
-    - samsung
-    - lg
-    - nec
-    - panasonic
-    - jvc
-    - sony
+    #- rc5
+    #- samsung
+    #- lg
+    #- nec
+    #- panasonic
+    #- jvc
+    #- sony
     - rc_switch
+    #- raw
+  tolerance: 60%
+  filter: 4us
+  idle: 4ms
+binary_sensor:
+  - platform: template
+    id: backdoor
+    name: "Back Door Sensor"
+    filters: []
+    device_class: door
+  - platform: remote_receiver
+    name: "Back Door Open"
+    id: backdoor_open
+    internal: true
+    rc_switch_raw:
+      protocol: 1
+      code: '101100001'
+    on_press:
+      - binary_sensor.template.publish:
+          id: backdoor
+          state: ON
+  - platform: remote_receiver
+    name: "Back Door Closed"
+    id: backdoor_closed
+    internal: true
+    rc_switch_raw:
+      protocol: 2
+      code: '10110000'
+    on_press:
+      - binary_sensor.template.publish:
+          id: backdoor
+          state: OFF
+  - platform: template
+    id: frontdoor
+    name: "Front Door Sensor"
+    filters: []
+    device_class: door
+  - platform: remote_receiver
+    name: "Front Door Open"
+    id: frontdoor_open
+    internal: true
+    rc_switch_raw:
+      protocol: 1
+      code: '11011001'
+    on_press:
+      - binary_sensor.template.publish:
+          id: frontdoor
+          state: ON
+  - platform: remote_receiver
+    name: "Front Door Closed"
+    id: frontdoor_closed
+    internal: true
+    rc_switch_raw:
+      protocol: 1
+      code: '11011001011'
+    on_press:
+      - binary_sensor.template.publish:
+          id: frontdoor
+          state: OFF
