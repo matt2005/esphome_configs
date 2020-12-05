@@ -1,0 +1,4 @@
+substitutions:
+  devicename: plug4
+  upper_devicename: "Plug4"
+<<: !include templatefiles/up111.yaml

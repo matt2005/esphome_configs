@@ -1,0 +1,135 @@
+esphome:
+  name: $devicename
+  platform: ESP8266
+  board: esp01_1m
+
+<<: !include common.yaml
+
+binary_sensor:
+  # Push Button
+  - platform: gpio
+    id: ${upper_devicename}_in_switch1
+    internal: true
+    pin: GPIO3
+    name: " Switch 1"
+    filters:
+      - invert:
+    on_click:
+      min_length: 50ms
+      max_length: 350ms
+      then:
+        - switch.toggle: ${upper_devicename}_out_relay1
+  # Template Sensor - Tracks Relay, Switches LED to Match (Internal Only)
+  - platform: template
+    name: "${upper_devicename} Template 1"
+    id: ${upper_devicename}_template1
+    internal: true
+    lambda: |-
+      if (id(${upper_devicename}_out_relay1).state) {
+        return true;
+      } else {
+        return false;
+      }
+    on_state:
+      - if:
+          condition:
+            - binary_sensor.is_on: ${upper_devicename}_template1
+          then:
+            - switch.turn_on: ${upper_devicename}_out_led
+      - if:
+          condition:
+            - binary_sensor.is_off: ${upper_devicename}_template1
+          then:
+            - switch.turn_off: ${upper_devicename}_out_led  
+
+switch:
+  # Restart Switch in HA
+  - platform: restart
+    name: "${upper_devicename} Restart"
+  # Relay Output
+  - platform: gpio
+    pin: GPIO14
+    id: ${upper_devicename}_out_relay1
+    name: "${upper_devicename} Relay 1"
+    restore_mode: ALWAYS_ON
+  # Blue LED Output
+  - platform: gpio
+    pin: GPIO1
+    internal: true
+    id: ${upper_devicename}_out_led
+    inverted: yes
+    name: "${upper_devicename} Touch Status Led"  
+  - platform: gpio
+    id: ${upper_devicename}_out_led_red
+    name: "${upper_devicename} Touch Status Led Red"
+    pin: GPIO13
+    inverted: True
+    restore_mode: ALWAYS_OFF
+
+sensor:
+  - platform: hlw8012
+    sel_pin:
+      number: GPIO12
+      inverted: True
+    cf_pin: GPIO04
+    cf1_pin: GPIO05
+    # Higher value gives lower watt readout
+    current_resistor: 0.0025
+    # Lower value gives lower voltage readout
+    voltage_divider: 880
+    current:
+      name: "${upper_devicename} energy_temp_Amperage"
+      unit_of_measurement: A
+    voltage:
+      name: "${upper_devicename} energy_temp_Voltage"
+      unit_of_measurement: V
+    power:
+      name: "${upper_devicename} energy_temp_Wattage"
+      unit_of_measurement: W
+      id: "energy_temp_Wattage"
+    change_mode_every: 8
+    update_interval: 10s
+  - platform: total_daily_energy
+    name: "${upper_devicename} energy_temp_Total Daily Energy"
+    power_id: "energy_temp_Wattage"
+    filters:
+        # Multiplication factor from W to kW is 0.001
+        - multiply: 0.001
+    unit_of_measurement: kWh
+  - platform: wifi_signal
+    name: ${upper_devicename} WiFi Signal
+    id: ${devicename}_wifi_signal
+    update_interval: 900s
+  - platform: uptime
+    name: ${upper_devicename} Uptime
+
+text_sensor:
+  - platform: version
+    name: ${upper_devicename} Version
+  - platform: template
+    name: ${upper_devicename} MAC Address
+    lambda: 'return {WiFi.macAddress().c_str()};'
+    icon: mdi:fingerprint
+    update_interval: 60s
+  - platform: template
+    name: ${upper_devicename} Wifi Strength
+    id: ${devicename}_wifi_strength
+    icon: "mdi:wifi"
+    lambda: |-
+      if (id(${devicename}_wifi_signal).state > -50 ) {
+        return {"Excellent"};
+      } else if (id(${devicename}_wifi_signal).state > -60) {
+        return {"Good"};
+      } else if (id(${devicename}_wifi_signal).state > -70) {
+        return {"Fair"};
+      } else if (id(${devicename}_wifi_signal).state < -70) {
+        return {"Weak"};
+      } else {
+        return {"None"};
+      }
+    update_interval: 900s
+
+status_led:
+  pin:
+    number: GPIO13
+    inverted: yes
