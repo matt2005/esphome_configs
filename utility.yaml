@@ -19,10 +19,36 @@ remote_receiver:
     #- sony
     - rc_switch
     #- raw
-  tolerance: 60%
-  filter: 4us
-  idle: 4ms
+  tolerance: 50%
+  filter: 2us
+  idle: 2ms
 binary_sensor:
+  - platform: remote_receiver
+    name: "Back Door Low Battery"
+    id: backdoor_battery
+    rc_switch_raw:
+      protocol: 1
+      code: '1'
+  - platform: template
+    id: backdoortamper
+    name: "Back Door Tamper Sensor"
+    filters: []
+    device_class: door
+  - platform: remote_receiver
+    name: "Back Door Tamper"
+    id: backdoor_tamper
+    internal: true
+    rc_switch_raw:
+      protocol: 1
+      code: '101100001010101000000111'
+    on_press:
+      if:
+        condition:
+          - binary_sensor.is_off: backdoortamper
+        then:
+          - binary_sensor.template.publish:
+              id: backdoortamper
+              state: ON
   - platform: template
     id: backdoor
     name: "Back Door Sensor"
@@ -34,22 +60,56 @@ binary_sensor:
     internal: true
     rc_switch_raw:
       protocol: 1
-      code: '101100001'
+      code: '101100001010101000001010'
     on_press:
-      - binary_sensor.template.publish:
-          id: backdoor
-          state: ON
+      if:
+        condition:
+          - binary_sensor.is_off: backdoor
+        then:
+          - binary_sensor.template.publish:
+              id: backdoor
+              state: ON
   - platform: remote_receiver
     name: "Back Door Closed"
     id: backdoor_closed
     internal: true
     rc_switch_raw:
-      protocol: 2
-      code: '10110000'
+      protocol: 1
+      code: '101100001010101000001110'
     on_press:
-      - binary_sensor.template.publish:
-          id: backdoor
-          state: OFF
+      if:
+        condition:
+          - binary_sensor.is_on: backdoor
+        then:
+          - binary_sensor.template.publish:
+              id: backdoor
+              state: OFF
+  - platform: remote_receiver
+    name: "Front Door Low Battery"
+    id: frontdoor_battery
+    rc_switch_raw:
+      protocol: 1
+      code: '1'
+  - platform: template
+    id: frontdoortamper
+    name: "Front Door Tamper Sensor"
+    filters: []
+    device_class: door
+  - platform: remote_receiver
+    name: "Front Door Tamper"
+    id: frontdoor_tamper
+    internal: true
+    rc_switch_raw:
+      protocol: 1
+      code: '110110010111110100000111'
+    on_press:
+      if:
+        condition:
+          - binary_sensor.is_off: frontdoortamper
+        then:
+          - binary_sensor.template.publish:
+              id: frontdoortamper
+              state: ON
   - platform: template
     id: frontdoor
     name: "Front Door Sensor"
@@ -61,19 +121,27 @@ binary_sensor:
     internal: true
     rc_switch_raw:
       protocol: 1
-      code: '11011001'
+      code: '110110010111110100001010'
     on_press:
-      - binary_sensor.template.publish:
-          id: frontdoor
-          state: ON
+      if:
+        condition:
+          - binary_sensor.is_off: frontdoor
+        then:
+          - binary_sensor.template.publish:
+              id: frontdoor
+              state: ON
   - platform: remote_receiver
     name: "Front Door Closed"
     id: frontdoor_closed
     internal: true
     rc_switch_raw:
       protocol: 1
-      code: '11011001011'
+      code: '110110010111110100001110'
     on_press:
-      - binary_sensor.template.publish:
-          id: frontdoor
-          state: OFF
+      if:
+        condition:
+          - binary_sensor.is_on: frontdoor
+        then:
+          - binary_sensor.template.publish:
+              id: frontdoor
+              state: OFF
